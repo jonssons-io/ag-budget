@@ -13,6 +13,7 @@
     "check:types": "tsc --noEmit"
   },
   "dependencies": {
+    "antd": "^5.11.2",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "react": "^18.2.0",
