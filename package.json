@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
+    "start:fe": "cd root/frontend && pnpm run dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd root/frontend && pnpm run build && cd ../backend && pnpm run build"
   },
