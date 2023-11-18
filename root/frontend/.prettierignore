@@ -4,3 +4,9 @@ coverage
 
 # Ignore all files in the .gitignore
 !.gitignore
+
+dist
+*.cjs
+*.md
+*.config.*
+.prettierrc
