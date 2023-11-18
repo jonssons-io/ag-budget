@@ -1,0 +1,33 @@
+# Ignore most commonly ignored files
+# See https://docs.github.com/en/github/using-git/ignoring-files for more information
+
+# Dependency directories
+/node_modules
+./root/*/node_modules
+
+# Compiled output
+/dist
+./root/*/dist
+
+# Logs and databases
+
+
+# OS generated files
+.DS_Store
+./root/*/DS_Store
+Thumbs.db
+./root/*/Thumbs.db
+
+# Editor/IDE specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Miscellaneous
+*.swp
+*.swo
+*.bak
+*.tmp
+*.tmp.*
+*.~lock.*
