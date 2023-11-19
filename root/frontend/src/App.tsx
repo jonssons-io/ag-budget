@@ -1,21 +1,18 @@
-import { Space, ConfigProvider, theme, Switch } from "antd";
+import { Space, ConfigProvider, theme, Switch, Button, Layout } from "antd";
 import useDarkMode from "./hooks/useDarkMode";
+import { darkTokens, lightTokens } from "./theme/theme";
 
 function App() {
   const [darkMode, handleChangeMode] = useDarkMode();
 
   return (
-    <div
-      style={{
-        background: darkMode ? "black" : "white",
-        height: "calc(100vh)",
+    <ConfigProvider
+      theme={{
+        algorithm: darkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        token: darkMode ? { ...darkTokens } : { ...lightTokens },
       }}
     >
-      <ConfigProvider
-        theme={{
-          algorithm: darkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
-        }}
-      >
+      <Layout style={{ minHeight: "100vh" }}>
         <Space direction="vertical">
           <Switch
             checked={darkMode}
@@ -25,9 +22,14 @@ function App() {
               handleChangeMode();
             }}
           />
+          <Button type="primary">Primary Button</Button>
+          <Button type="link">Secondary Button</Button>
+          <Button type="default">Danger Button</Button>
+          <Button type="dashed">Success Button</Button>
+          <Button type="text">Warning Button</Button>
         </Space>
-      </ConfigProvider>
-    </div>
+      </Layout>
+    </ConfigProvider>
   );
 }
 
