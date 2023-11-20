@@ -13,6 +13,7 @@
     "check:types": "tsc --noEmit"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "antd": "^5.11.2",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
