@@ -1,5 +1,5 @@
 export const darkTokens = {
-  colorPrimary: "#cb0c9f",
+  colorPrimary: "#521443",
   colorInfo: "#17c1e8",
   colorSuccess: "#82d616",
   colorWarning: "#fbcf33",
