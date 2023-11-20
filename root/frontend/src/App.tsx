@@ -1,33 +1,31 @@
-import { Space, ConfigProvider, theme, Switch, Button, Layout } from "antd";
+import { ConfigProvider, theme, Layout } from "antd";
 import useDarkMode from "./hooks/useDarkMode";
 import { darkTokens, lightTokens } from "./theme/theme";
+import appOverrides from "./theme/componentsOverride";
+import Sidebar from "./layout/components/Sidebar";
+import CustomHeader from "./layout/components/CustomHeader";
 
 function App() {
   const [darkMode, handleChangeMode] = useDarkMode();
+  const { Content } = Layout;
 
   return (
     <ConfigProvider
       theme={{
         algorithm: darkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: darkMode ? { ...darkTokens } : { ...lightTokens },
+        components: appOverrides(darkMode),
       }}
     >
       <Layout style={{ minHeight: "100vh" }}>
-        <Space direction="vertical">
-          <Switch
-            checked={darkMode}
-            checkedChildren="Dark Mode"
-            unCheckedChildren="Light Mode"
-            onChange={() => {
-              handleChangeMode();
-            }}
+        <Sidebar />
+        <Layout>
+          <CustomHeader
+            darkMode={darkMode}
+            handleChangeMode={handleChangeMode}
           />
-          <Button type="primary">Primary Button</Button>
-          <Button type="link">Secondary Button</Button>
-          <Button type="default">Danger Button</Button>
-          <Button type="dashed">Success Button</Button>
-          <Button type="text">Warning Button</Button>
-        </Space>
+          <Content>Content</Content>
+        </Layout>
       </Layout>
     </ConfigProvider>
   );
