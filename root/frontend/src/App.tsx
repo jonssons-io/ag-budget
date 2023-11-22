@@ -1,13 +1,14 @@
-import { ConfigProvider, theme, Layout } from "antd";
+import { ConfigProvider, theme } from "antd";
 import useDarkMode from "./hooks/useDarkMode";
 import { darkTokens, lightTokens } from "./theme/theme";
 import appOverrides from "./theme/componentsOverride";
-import Sidebar from "./layout/components/Sidebar";
-import CustomHeader from "./layout/components/CustomHeader";
+import Layout from "./layout/Layout";
+import withSuspense from "./util/hoc/withSuspense";
+
+const LayoutWithSuspense = withSuspense(Layout);
 
 function App() {
   const [darkMode, handleChangeMode] = useDarkMode();
-  const { Content } = Layout;
 
   return (
     <ConfigProvider
@@ -17,16 +18,10 @@ function App() {
         components: appOverrides(darkMode),
       }}
     >
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sidebar />
-        <Layout>
-          <CustomHeader
-            darkMode={darkMode}
-            handleChangeMode={handleChangeMode}
-          />
-          <Content>Content</Content>
-        </Layout>
-      </Layout>
+      <LayoutWithSuspense
+        darkMode={darkMode}
+        handleChangeMode={handleChangeMode}
+      />
     </ConfigProvider>
   );
 }
