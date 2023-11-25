@@ -1,33 +1,24 @@
-# Ignore most commonly ignored files
-# See https://docs.github.com/en/github/using-git/ignoring-files for more information
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Dependency directories
-/node_modules
-./root/*/node_modules
+node_modules
+dist
+dist-ssr
+*.local
 
-# Compiled output
-/dist
-./root/*/dist
-
-# Logs and databases
-
-
-# OS generated files
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-./root/*/DS_Store
-Thumbs.db
-./root/*/Thumbs.db
-
-# Editor/IDE specific files
-.idea/
-.vscode/
-*.sublime-project
-*.sublime-workspace
-
-# Miscellaneous
-*.swp
-*.swo
-*.bak
-*.tmp
-*.tmp.*
-*.~lock.*
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
