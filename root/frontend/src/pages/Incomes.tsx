@@ -1,10 +1,10 @@
-import { Typography } from "antd";
 import withSuspense from "../util/hoc/withSuspense";
-
-const { Text } = Typography;
+import { mockIncome } from "../__mock__/mockData";
+import DataTable from "../components/datatable/DataTable";
+import { IncomeColumns } from "../components/datatable/TableColumns";
 
 function Incomes() {
-  return <Text>Incomes</Text>;
+  return <DataTable dataSource={mockIncome} columns={IncomeColumns} />;
 }
 
 const IncomesWithSuspense = withSuspense(Incomes);
