@@ -1,18 +1,13 @@
+import { useAtom } from "jotai";
 import { Layout, Switch } from "antd";
 import IconMoon from "./IconMoon";
 import IconSun from "./IconSun";
 import { darkTokens, lightTokens } from "../../theme/theme";
+import { darkModeAtom } from "../../state/atoms";
 
-type CustomHeaderProps = {
-  darkMode: boolean;
-  handleChangeMode: () => void;
-};
-
-export default function CustomHeader({
-  darkMode,
-  handleChangeMode,
-}: CustomHeaderProps) {
+export default function CustomHeader() {
   const { Header } = Layout;
+  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
 
   return (
     <Header>
@@ -35,9 +30,7 @@ export default function CustomHeader({
             size={18}
           />
         }
-        onChange={() => {
-          handleChangeMode();
-        }}
+        onChange={() => setDarkMode(!darkMode)}
       />
     </Header>
   );
