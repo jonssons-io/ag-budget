@@ -1,7 +1,10 @@
+import { Typography } from "antd";
 import withSuspense from "../util/hoc/withSuspense";
 
+const { Text } = Typography;
+
 function Dashboard() {
-  return <p>Dashboard</p>;
+  return <Text>Dashboard</Text>;
 }
 
 const DashboardWithSuspense = withSuspense(Dashboard);
