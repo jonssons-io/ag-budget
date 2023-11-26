@@ -1,56 +1,36 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Layout, Menu, Image, Space, Flex, Typography } from "antd";
-import type { MenuProps } from "antd";
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import Logo from "../../assets/icons/icon.png";
+import { sidebarRoutes } from "../../util/router/routes";
 
-type MenuItem = Required<MenuProps>["items"][number];
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
+interface MenuInfo {
+  key: string;
+  keyPath: string[];
+  /** @deprecated This will not support in future. You should avoid to use this */
+  item: React.ReactInstance;
+  domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
 }
-
-// TODO: Populate from routes and fetch selected item from URL
-const items: MenuItem[] = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
-    getItem("Tom", "3"),
-    getItem("Bill", "4"),
-    getItem("Alex", "5"),
-  ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
-  ]),
-  getItem("Files", "9", <FileOutlined />),
-];
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { Sider } = Layout;
   const { Title } = Typography;
+  const navigate = useNavigate();
 
   const siderStyle: React.CSSProperties = {
     margin: "1rem",
     borderRadius: "1rem",
     backdropFilter: "saturate(200%) blur(1.875rem)",
+  };
+
+  const handleMenuClick = (e: MenuInfo) => {
+    if (e.key) {
+      const target = sidebarRoutes.find((item) => item.key === e.key) || null;
+      if (target) {
+        navigate(target.key);
+      }
+    }
   };
 
   return (
@@ -72,7 +52,12 @@ export default function Sidebar() {
         </Space>
       </Flex>
 
-      <Menu mode="inline" defaultSelectedKeys={["1"]} items={items} />
+      <Menu
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+        items={sidebarRoutes}
+        onClick={(e) => handleMenuClick(e)}
+      />
     </Sider>
   );
 }
