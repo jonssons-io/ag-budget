@@ -16,7 +16,7 @@ export default function GeneralLayout() {
 
   return (
     <ThemeConfigProvider>
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout style={{ minHeight: "100vh", paddingRight: "1rem" }}>
         <SidebarWithSuspense />
         <Layout>
           <CustomHeaderWithSuspense />
