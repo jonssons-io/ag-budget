@@ -14,6 +14,11 @@ const colors = {
     dark: "#070812",
   },
 
+  paper2: {
+    light: "#e9ecef",
+    dark: "#1c1f2a",
+  },
+
   text: {
     primary: {
       main: { light: "#67748e", dark: "#a9b0bf" },

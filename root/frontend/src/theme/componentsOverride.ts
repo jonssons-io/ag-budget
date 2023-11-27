@@ -33,6 +33,14 @@ const appOverrides = (darkMode: boolean) => {
         : colors.text.primary.main.light,
       activeBarBorderWidth: 0,
     },
+    Table: {
+      headerBg: darkMode ? colors.paper0.dark : colors.paper0.light,
+      headerSortActiveBg: darkMode ? colors.paper2.dark : colors.paper2.light,
+      headerSortHoverBg: darkMode ? colors.paper2.dark : colors.paper2.light,
+      rowHoverBg: darkMode ? colors.paper0.dark : colors.paper0.light,
+      rowSelectedBg: darkMode ? colors.paper2.dark : colors.paper2.light,
+      rowSelectedHoverBg: darkMode ? colors.paper2.dark : colors.paper2.light,
+    },
   };
 };
 export default appOverrides;
