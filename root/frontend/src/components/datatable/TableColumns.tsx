@@ -1,8 +1,15 @@
 import { Income } from "../../__mock__/mockDataTypes";
 import TableSorter from "../../util/tablesorter";
 
+const getFilters = (values: string[]) => {
+  return Array.from(new Set(values)).map((value) => ({
+    text: value,
+    value,
+  }));
+};
+
 // eslint-disable-next-line import/prefer-default-export
-export const IncomeColumns = [
+export const incomeColumns = (dataSource: Income[]) => [
   {
     title: "Titel",
     dataIndex: "name",
@@ -27,6 +34,9 @@ export const IncomeColumns = [
     sorter: (a: Income, b: Income) =>
       TableSorter.STRING(a.occurance, b.occurance),
     multiple: 1,
+    filters: getFilters(dataSource.map((income) => income.occurance)),
+    onFilter: (value: string, record: Income) =>
+      record.occurance.indexOf(value) === 0,
   },
   {
     title: "Avsändare",
@@ -34,6 +44,9 @@ export const IncomeColumns = [
     sorter: (a: Income, b: Income) =>
       a.sender && b.sender && TableSorter.STRING(a.sender, b.sender),
     multiple: 1,
+    filters: getFilters(dataSource.map((income) => income.sender ?? "")),
+    onFilter: (value: string, record: Income) =>
+      record.sender?.indexOf(value) === 0,
   },
   {
     title: "Kategori",
@@ -41,5 +54,8 @@ export const IncomeColumns = [
     sorter: (a: Income, b: Income) =>
       TableSorter.STRING(a.category, b.category),
     multiple: 1,
+    filters: getFilters(dataSource.map((income) => income.category)),
+    onFilter: (value: string, record: Income) =>
+      record.category.indexOf(value) === 0,
   },
 ];
