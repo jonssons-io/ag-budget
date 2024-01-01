@@ -1,10 +1,18 @@
-import { Typography } from "antd";
+import { Flex } from "antd";
 import withSuspense from "../util/hoc/withSuspense";
-
-const { Text } = Typography;
+import PieChart from "../components/charts/PieChart";
+import {
+  aggregatedIncomeByCategory,
+  aggregatedIncomeBySender,
+} from "../state/pieChartData";
 
 function Dashboard() {
-  return <Text>Dashboard</Text>;
+  return (
+    <Flex vertical={false} justify="flex-start" wrap="wrap">
+      <PieChart data={aggregatedIncomeByCategory} />
+      <PieChart data={aggregatedIncomeBySender} />
+    </Flex>
+  );
 }
 
 const DashboardWithSuspense = withSuspense(Dashboard);

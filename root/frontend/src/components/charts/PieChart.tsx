@@ -5,6 +5,11 @@ export type PieChartData = {
   value: number;
 };
 
+const substringLongLabel = (label: string) => {
+  if (label.length <= 9) return label;
+  return `${label.substring(0, 7)}...`;
+};
+
 export default function PieChart({ data }: { data: PieChartData[] }) {
   const config: PieConfig = {
     appendPadding: 10,
@@ -15,7 +20,8 @@ export default function PieChart({ data }: { data: PieChartData[] }) {
     label: {
       type: "inner",
       offset: "-50%",
-      content: ({ percent, type }) => `${type} ${(percent * 100).toFixed(0)}%`,
+      content: ({ percent, type }) =>
+        `${substringLongLabel(type)} ${(percent * 100).toFixed(0)}%`,
       style: {
         textAlign: "center",
         fontSize: 14,
