@@ -1,5 +1,10 @@
 const express = require("express");
-const { getUserInfo } = require("./db/db_client");
+const {
+  getUserInfo,
+  getAssociatedBudgets,
+  getIncomes,
+  getExpenses,
+} = require("./db/db_client");
 
 const app = express();
 
@@ -8,10 +13,42 @@ app.get("/", (req, res) => {
 });
 
 app.get("/user", async (req, res) => {
-  let name = req.query.name ?? "-";
-  let userInfo = await getUserInfo(name);
-  console.log("Got user info:", userInfo);
+  let userId = req.query.id ?? "-"; // Id should probably not be a query parameter
+  let userInfo = await getUserInfo(userId);
   res.send(userInfo);
+});
+
+app.get("/budgets", async (req, res) => {
+  let userId = req.query.userid ?? "-"; // Id should probably not be a query parameter
+  let associatedBudgets = await getAssociatedBudgets(userId);
+  res.send(associatedBudgets);
+});
+
+app.get("/budgets/:id/expenses", async (req, res) => {
+  let budgetId = req.params.id;
+  let expenses = await getExpenses(budgetId);
+  res.send(expenses);
+});
+
+app.get("/budgets/:id/incomes", async (req, res) => {
+  let budgetId = req.params.id;
+  let incomes = await getIncomes(budgetId);
+  res.send(incomes);
+});
+
+app.get("/test", async (req, res) => {
+  res.send("OK");
+});
+app.post("/test", async (req, res) => {
+  res.send("OK");
+});
+app.put("/test", async (req, res) => {
+  res.send("OK");
+});
+
+app.use((req, res, next) => {
+  console.log(req);
+  next();
 });
 
 app.listen(5000, () => {
