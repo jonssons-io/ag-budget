@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
+import { MessagePopup } from "../util/types/MessageTypes";
 
 const isSystemDarkMode = () => {
   const prefersDarkMode =
@@ -28,4 +29,5 @@ export const darkModeAtom = atomWithStorage(
   },
   { getOnInit: true },
 );
-export const sillyAtom = atom("silly");
+
+export const messageSettingsAtom = atom<MessagePopup | null>(null);
