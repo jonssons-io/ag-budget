@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Layout } from "antd";
 import withSuspense from "../util/hoc/withSuspense";
 import ThemeConfigProvider from "../theme/ThemeConfigProvider";
+import MessagePopup from "../util/message/MessagePopup";
 
 const Sidebar = lazy(() => import("./components/Sidebar"));
 const CustomHeader = lazy(() => import("./components/CustomHeader"));
@@ -21,6 +22,7 @@ export default function GeneralLayout() {
         <Layout>
           <CustomHeaderWithSuspense />
           <ContentWithSuspense>
+            <MessagePopup />
             <Outlet />
           </ContentWithSuspense>
         </Layout>
