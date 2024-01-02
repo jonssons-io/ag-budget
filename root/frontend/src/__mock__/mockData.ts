@@ -24,7 +24,7 @@ export const mockExpenses: Expense[] = [
     date: new Date(),
     occurance: "once",
     category: "Shopping",
-    company: "Mock Company 1",
+    receiver: "Mock Company 1",
   },
   {
     budgetId: "1",
@@ -34,7 +34,7 @@ export const mockExpenses: Expense[] = [
     date: new Date(),
     occurance: "monthly",
     category: "Housing",
-    company: "Mock Company 2",
+    receiver: "Mock Company 2",
   },
   {
     budgetId: "1",
@@ -44,7 +44,7 @@ export const mockExpenses: Expense[] = [
     date: new Date(),
     occurance: "monthly",
     category: "Housing",
-    company: "Mock Company 3",
+    receiver: "Mock Company 3",
   },
 ];
 
@@ -54,7 +54,7 @@ export const mockIncome: Income[] = [
     id: "1",
     name: "Lön Gabrielle",
     amount: 100,
-    date: "2023-12-25",
+    date: new Date("2023-12-25"),
     occurance: "monthly",
     sender: "Power Factors",
     category: "Salary",
@@ -64,7 +64,7 @@ export const mockIncome: Income[] = [
     id: "2",
     name: "Lön Axel",
     amount: 200,
-    date: "2023-12-25",
+    date: new Date("2023-12-25"),
     occurance: "monthly",
     sender: "WirelessCar",
     category: "Salary",
@@ -74,7 +74,7 @@ export const mockIncome: Income[] = [
     id: "3",
     name: "X-mas money",
     amount: 300,
-    date: "2023-12-24",
+    date: new Date("2023-12-24"),
     occurance: "once",
     sender: "Family",
     category: "Misc",
@@ -84,7 +84,7 @@ export const mockIncome: Income[] = [
     id: "4",
     name: "B-day money",
     amount: 300,
-    date: "2024-02-08",
+    date: new Date("2024-02-08"),
     occurance: "once",
     sender: "Family",
     category: "Misc",
@@ -94,7 +94,7 @@ export const mockIncome: Income[] = [
     id: "5",
     name: "B-day money",
     amount: 300,
-    date: "2024-02-08",
+    date: new Date("2024-02-08"),
     occurance: "once",
     sender: "Family",
     category: "Misc",
@@ -104,7 +104,7 @@ export const mockIncome: Income[] = [
     id: "6",
     name: "B-day money",
     amount: 300,
-    date: "2024-02-08",
+    date: new Date("2024-02-08"),
     occurance: "once",
     sender: "Family",
     category: "Misc",
@@ -114,7 +114,7 @@ export const mockIncome: Income[] = [
     id: "7",
     name: "Lön Gabrielle",
     amount: 100,
-    date: "2023-12-25",
+    date: new Date("2023-12-25"),
     occurance: "monthly",
     sender: "Power Factors",
     category: "Salary",
@@ -124,7 +124,7 @@ export const mockIncome: Income[] = [
     id: "8",
     name: "Lön Axel",
     amount: 200,
-    date: "2023-12-25",
+    date: new Date("2023-12-25"),
     occurance: "monthly",
     sender: "WirelessCar",
     category: "Salary",
@@ -134,7 +134,7 @@ export const mockIncome: Income[] = [
     id: "9",
     name: "X-mas money",
     amount: 300,
-    date: "2023-12-24",
+    date: new Date("2023-12-24"),
     occurance: "once",
     sender: "Family",
     category: "Misc",
@@ -144,7 +144,7 @@ export const mockIncome: Income[] = [
     id: "10",
     name: "B-day money",
     amount: 300,
-    date: "2024-02-08",
+    date: new Date("2024-02-08"),
     occurance: "once",
     sender: "Family",
     category: "Misc",
@@ -154,7 +154,7 @@ export const mockIncome: Income[] = [
     id: "11",
     name: "B-day money",
     amount: 300,
-    date: "2024-02-08",
+    date: new Date("2024-02-08"),
     occurance: "once",
     sender: "Family",
     category: "Misc",
@@ -164,9 +164,30 @@ export const mockIncome: Income[] = [
     id: "12",
     name: "B-day money",
     amount: 300,
-    date: "2024-02-08",
+    date: new Date("2024-02-08"),
     occurance: "once",
     sender: "Family",
     category: "Misc",
   },
+];
+
+type BudgetCategory = {
+  label: string;
+  value: string;
+};
+
+export const mockExpenseCategories: BudgetCategory[] = [
+  { label: "Övrigt", value: "misc" },
+  { label: "Mat", value: "food" },
+  { label: "Boende", value: "housing" },
+  { label: "Transport", value: "transport" },
+  { label: "Shopping", value: "shopping" },
+];
+
+export const mockIncomeCategories: BudgetCategory[] = [
+  { label: "Övrigt", value: "misc" },
+  { label: "Lön", value: "salary" },
+  { label: "Försäljning", value: "sales" },
+  { label: "Present", value: "gift" },
+  { label: "Bidrag", value: "grant" },
 ];

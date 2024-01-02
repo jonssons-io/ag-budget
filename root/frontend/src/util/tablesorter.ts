@@ -1,4 +1,4 @@
-const dateSorter = (a: string, b: string) => {
+const dateSorter = (a: Date, b: Date) => {
   const aDate = new Date(a);
   const bDate = new Date(b);
   return aDate.getTime() - bDate.getTime();

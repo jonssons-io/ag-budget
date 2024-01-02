@@ -29,7 +29,7 @@ export type Expense = {
   date: Date;
   occurance: Occurance;
   category: string;
-  company?: string;
+  receiver?: string;
 };
 
 export type Income = {
@@ -37,7 +37,7 @@ export type Income = {
   id: string;
   name: string;
   amount: number;
-  date: string;
+  date: Date;
   occurance: Occurance;
   sender?: string;
   category: string;

@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { DatePicker, Form, Input, InputNumber, Modal, Select } from "antd";
-import { RecurranceEnum } from "../../util/types/IncomeTypes";
+import { RecurranceEnum } from "../../util/types/BudgetTypes";
 import {
   MinLength,
   NoWhitespace,
   RequiredField,
 } from "../../util/formvalidation/FormValidation";
 import { messageSettingsAtom } from "../../state/atoms";
+import { mockIncomeCategories } from "../../__mock__/mockData";
 // TODO: Hook up to API/DB
 type SubmitFailedType = {
   errorFields: {
@@ -132,7 +133,7 @@ export default function IncomeFormModal({ open, closeModal }: IncomeFormProps) {
         form={form}
         name="AddIncome"
         style={{ maxWidth: 600 }}
-        initialValues={{ remember: true, modifier: "public" }}
+        initialValues={{ remember: true, occurance: "once", category: "misc" }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
@@ -146,7 +147,7 @@ export default function IncomeFormModal({ open, closeModal }: IncomeFormProps) {
           validateDebounce={1000}
           tooltip="Ange ett namn för inkomsten. Exempelvis 'Lön Pia' eller 'Barnbidrag Theo'."
         >
-          <Input placeholder="Ange ett namn för inkomsten inkomsten" />
+          <Input placeholder="Ange ett namn för inkomsten." />
         </Form.Item>
         <Form.Item<FormFields>
           label="Summa"
@@ -179,7 +180,7 @@ export default function IncomeFormModal({ open, closeModal }: IncomeFormProps) {
           rules={[{ required: false }]}
           hasFeedback
           validateDebounce={1000}
-          tooltip="Välj hur ofta inkomsten förekommer. Exempelvis 'En gång' eller 'Varje månad'. Om inget anges antas inkomsten förekomma en gång."
+          tooltip="Välj hur ofta inkomsten förekommer. Exempelvis 'En gång' eller 'Varje månad'."
         >
           <Select
             placeholder="Ange förekomst, t.ex. 'En gång', 'Månadsvis' eller 'Årsvis'."
@@ -205,9 +206,15 @@ export default function IncomeFormModal({ open, closeModal }: IncomeFormProps) {
           rules={[MinLength(2), NoWhitespace()]}
           hasFeedback
           validateDebounce={1000}
-          tooltip="Välj en kategori som passar inkomsten, exempelvis 'Lön' eller 'Bidrag'. Okategoriserade inkomster hamnar i kategorin 'Övrigt'."
+          tooltip="Välj en kategori att lägga inkomsten i, exempelvis 'Lön' eller 'Bidrag'."
         >
-          <Input placeholder="Välj en kategori för inkomsten." />
+          <Select
+            placeholder="Välj en kategori för inkomsten."
+            options={mockIncomeCategories.map((category) => ({
+              label: category.label,
+              value: category.value,
+            }))}
+          />
         </Form.Item>
       </Form>
     </Modal>
