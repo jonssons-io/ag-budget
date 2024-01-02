@@ -30,7 +30,7 @@ export const routesMap: Record<string, RouteWithIcon> = {
     path: "/",
     element: <DashboardWithSuspense />,
     icon: <CalculatorOutlined />,
-    label: "Dashboard",
+    label: "Översikt",
   },
   incomesRoute: {
     key: "/incomes",
@@ -38,7 +38,7 @@ export const routesMap: Record<string, RouteWithIcon> = {
     path: "/incomes",
     element: <IncomesWithSuspense />,
     icon: <PlusOutlined />,
-    label: "Incomes",
+    label: "Inkomster",
   },
   expensesRoute: {
     key: "/expenses",
@@ -46,7 +46,7 @@ export const routesMap: Record<string, RouteWithIcon> = {
     path: "/expenses",
     element: <ExpensesWithSuspense />,
     icon: <MinusOutlined />,
-    label: "Expenses",
+    label: "Utgifter",
   },
 };
 
