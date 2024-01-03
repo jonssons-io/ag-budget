@@ -37,12 +37,15 @@ app.get("/budgets/:id/incomes", async (req, res) => {
 });
 
 app.get("/test", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.send("OK");
 });
 app.post("/test", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.send("OK");
 });
 app.put("/test", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.send("OK");
 });
 
