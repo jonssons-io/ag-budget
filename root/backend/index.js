@@ -8,6 +8,11 @@ const {
 
 const app = express();
 
+app.use((req, res, next) => {
+  console.log("Request: ", req);
+  next();
+});
+
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
 });
@@ -47,11 +52,6 @@ app.post("/test", async (req, res) => {
 app.put("/test", async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send("OK");
-});
-
-app.use((req, res, next) => {
-  console.log("Request: ", req);
-  next();
 });
 
 app.listen(5000, () => {
