@@ -7,7 +7,7 @@ import DataTable from "../components/datatable/DataTable";
 import { incomeColumns } from "../components/datatable/TableColumns";
 import IncomeFormModal from "../components/modals/IncomeFormModal";
 
-function Incomes() {
+function IncomesPage() {
   const [incomeModalOpen, setIncomeModalOpen] = useState(false);
 
   return (
@@ -34,6 +34,6 @@ function Incomes() {
   );
 }
 
-const IncomesWithSuspense = withSuspense(Incomes);
+const IncomesPageWithSuspense = withSuspense(IncomesPage);
 
-export default IncomesWithSuspense;
+export default IncomesPageWithSuspense;

@@ -4,9 +4,9 @@ import {
   MinusOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import DashboardWithSuspense from "../../pages/Dashboard";
-import ExpensesWithSuspense from "../../pages/Expenses";
-import IncomesWithSuspense from "../../pages/Incomes";
+import DashboardPageWithSuspense from "../../pages/DashboardPage";
+import ExpensesPageWithSuspense from "../../pages/ExpensesPage";
+import IncomesPageWithSuspense from "../../pages/IncomesPage";
 
 type SidebarRoute = {
   key: string;
@@ -28,7 +28,7 @@ export const routesMap: Record<string, RouteWithIcon> = {
     key: "/",
     index: true,
     path: "/",
-    element: <DashboardWithSuspense />,
+    element: <DashboardPageWithSuspense />,
     icon: <CalculatorOutlined />,
     label: "Översikt",
   },
@@ -36,7 +36,7 @@ export const routesMap: Record<string, RouteWithIcon> = {
     key: "/incomes",
     index: false,
     path: "/incomes",
-    element: <IncomesWithSuspense />,
+    element: <IncomesPageWithSuspense />,
     icon: <PlusOutlined />,
     label: "Inkomster",
   },
@@ -44,7 +44,7 @@ export const routesMap: Record<string, RouteWithIcon> = {
     key: "/expenses",
     index: false,
     path: "/expenses",
-    element: <ExpensesWithSuspense />,
+    element: <ExpensesPageWithSuspense />,
     icon: <MinusOutlined />,
     label: "Utgifter",
   },
