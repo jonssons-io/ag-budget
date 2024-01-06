@@ -8,7 +8,6 @@ const getFilters = (values: string[]) => {
   }));
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const incomeColumns = (dataSource: Income[]) => [
   {
     title: "Titel",
