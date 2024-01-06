@@ -19,7 +19,7 @@
     "@ant-design/charts": "^1.4.3",
     "@ant-design/icons": "^5.2.6",
     "@ant-design/plots": "^2.0.5",
-    "antd": "^5.11.2",
+    "antd": "^5.12.8",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "jotai": "^2.6.0",
