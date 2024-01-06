@@ -9,4 +9,14 @@ export default defineConfig({
       "@": "/src",
     },
   },
+  server: {
+    proxy: {
+      "/test": {
+        target:
+          "https://ag-budget-backend-3slhga2ry-jonssons-projects.vercel.app",
+        secure: true,
+        changeOrigin: true,
+      },
+    },
+  },
 });

@@ -6,7 +6,7 @@ import {
   aggregatedIncomeBySender,
 } from "../state/pieChartData";
 
-function Dashboard() {
+function DashboardPage() {
   return (
     <Flex vertical={false} justify="flex-start" wrap="wrap">
       <PieChart data={aggregatedIncomeByCategory} />
@@ -15,6 +15,6 @@ function Dashboard() {
   );
 }
 
-const DashboardWithSuspense = withSuspense(Dashboard);
+const DashboardPageWithSuspense = withSuspense(DashboardPage);
 
-export default DashboardWithSuspense;
+export default DashboardPageWithSuspense;
