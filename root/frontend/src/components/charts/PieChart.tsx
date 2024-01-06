@@ -20,7 +20,7 @@ export default function PieChart({ data }: { data: PieChartData[] }) {
     label: {
       type: "inner",
       offset: "-50%",
-      content: ({ percent, type }) =>
+      content: ({ percent, type }: { percent: number; type: string }) =>
         `${substringLongLabel(type)} ${(percent * 100).toFixed(0)}%`,
       style: {
         textAlign: "center",
