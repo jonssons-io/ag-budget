@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Layout, Menu, Image, Space, Flex, Typography } from "antd";
-import Logo from "../../assets/icons/icon.png";
+import { Layout, Menu, Space, Flex } from "antd";
+import { useAtomValue } from "jotai";
 import { sidebarRoutes } from "../../util/router/routes";
+import RethinkLogo from "../../assets/RethinkLogo";
+import { darkModeAtom } from "../../state/atoms";
 
 interface MenuInfo {
   key: string;
@@ -14,8 +16,8 @@ interface MenuInfo {
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const darkMode = useAtomValue(darkModeAtom);
   const { Sider } = Layout;
-  const { Title } = Typography;
   const navigate = useNavigate();
 
   const siderStyle: React.CSSProperties = {
@@ -44,11 +46,14 @@ export default function Sidebar() {
       <Flex
         align="center"
         justify="center"
-        style={{ padding: "1rem", height: isCollapsed ? "148px" : "auto" }}
+        style={{ padding: "1rem", height: "150px" }}
       >
         <Space direction="vertical" align="center">
-          <Image alt="Budget Bubblans logo" src={Logo} preview={false} />
-          {!isCollapsed ? <Title level={3}>re|think</Title> : null}
+          <RethinkLogo
+            darkMode={darkMode}
+            width={isCollapsed ? 80 : 100}
+            text={!isCollapsed}
+          />
         </Space>
       </Flex>
 
