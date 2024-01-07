@@ -41,6 +41,10 @@ const appOverrides = (darkMode: boolean) => {
       rowSelectedBg: darkMode ? colors.paper2.dark : colors.paper2.light,
       rowSelectedHoverBg: darkMode ? colors.paper2.dark : colors.paper2.light,
     },
+    Modal: {
+      contentBg: darkMode ? colors.paper0.dark : colors.paper0.light,
+      headerBg: darkMode ? colors.paper0.dark : colors.paper0.light,
+    },
   };
 };
 export default appOverrides;

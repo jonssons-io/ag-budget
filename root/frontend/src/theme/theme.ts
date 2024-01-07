@@ -7,8 +7,9 @@ export const darkTokens = {
   colorBgBase: "#1b1b1b",
   colorBgContainer: "#070812",
   colorFillContent: "#1b1b1b",
-  colorTextBase: "#a9b0bf",
+  colorTextBase: "#afb5c4",
   colorLink: "#17c1e8",
+  colorTextPlaceholder: "#62666e",
 };
 
 export const lightTokens = {
@@ -20,6 +21,7 @@ export const lightTokens = {
   colorBgBase: "#f8f9fa",
   colorBgContainer: "#f8f9fa",
   colorFillContent: "#f8f9fa",
-  colorTextBase: "#454d5e",
+  colorTextBase: "#3a414f",
   colorLink: "#17c1e8",
+  colorTextPlaceholder: "#a5abb5",
 };
