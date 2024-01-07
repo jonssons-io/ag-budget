@@ -26,5 +26,6 @@ module.exports = {
     ],
     "react/jsx-one-expression-per-line": [2, { allow: "single-child" }],
     "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": 0,
   },
 };
