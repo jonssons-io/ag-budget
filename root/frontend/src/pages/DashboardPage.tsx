@@ -8,7 +8,12 @@ import {
 
 function DashboardPage() {
   return (
-    <Flex vertical={false} justify="flex-start" wrap="wrap">
+    <Flex
+      vertical={false}
+      justify="flex-start"
+      wrap="wrap"
+      style={{ height: "30vh" }}
+    >
       <PieChart data={aggregatedIncomeByCategory} />
       <PieChart data={aggregatedIncomeBySender} />
     </Flex>

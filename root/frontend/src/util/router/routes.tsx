@@ -1,61 +1,74 @@
 import { RouteObject } from "react-router-dom";
 import {
-  CalculatorOutlined,
+  AppstoreAddOutlined,
+  FundViewOutlined,
   MinusOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
 import DashboardPageWithSuspense from "../../pages/DashboardPage";
 import ExpensesPageWithSuspense from "../../pages/ExpensesPage";
 import IncomesPageWithSuspense from "../../pages/IncomesPage";
+import BudgetSettingsPage from "../../pages/BudgetSettingsPage";
 
-type SidebarRoute = {
-  key: string;
-  icon: JSX.Element;
-  label: string;
-  children?: SidebarRoute[];
-};
-
-type Route = {
-  index: boolean;
-  path: string;
-  element: JSX.Element;
-};
-
-type RouteWithIcon = Route & SidebarRoute;
-
-export const routesMap: Record<string, RouteWithIcon> = {
+export const routesMap: Record<string, RouteObject> = {
   dashboardRoute: {
-    key: "/",
     index: true,
     path: "/",
     element: <DashboardPageWithSuspense />,
-    icon: <CalculatorOutlined />,
-    label: "Översikt",
   },
   incomesRoute: {
-    key: "/incomes",
     index: false,
     path: "/incomes",
     element: <IncomesPageWithSuspense />,
-    icon: <PlusOutlined />,
-    label: "Inkomster",
   },
   expensesRoute: {
-    key: "/expenses",
     index: false,
     path: "/expenses",
     element: <ExpensesPageWithSuspense />,
-    icon: <MinusOutlined />,
-    label: "Utgifter",
+  },
+  budgetSettingsRoute: {
+    path: "/settings/budget",
+    index: false,
+    element: <BudgetSettingsPage />,
   },
 };
 
+type MenuItemsType = {
+  label: string;
+  key: string;
+  icon: React.ReactNode;
+  type: "divider" | "group" | "link";
+  children?: MenuItemsType[];
+};
+
+const sidebarItemsMap: MenuItemsType[] = [
+  { label: "Översikt", key: "/", icon: <FundViewOutlined />, type: "link" },
+  { label: "Inkomster", key: "/incomes", icon: <PlusOutlined />, type: "link" },
+  {
+    label: "Utgifter",
+    key: "/expenses",
+    icon: <MinusOutlined />,
+    type: "link",
+  },
+  { type: "divider", label: "", key: "no-route-first-divider", icon: null },
+  {
+    label: "Inställningar",
+    key: "no-route-settings",
+    type: "group",
+    icon: null,
+    children: [
+      {
+        label: "Budget",
+        key: "/settings/budget",
+        icon: <AppstoreAddOutlined />,
+        type: "link",
+      },
+    ],
+  },
+];
+
 const routerRoutes: RouteObject[] = Object.values(routesMap).map(
-  ({ icon, label, children, ...rest }) => rest,
+  ({ children, ...rest }) => rest,
 );
 
-const sidebarRoutes: SidebarRoute[] = Object.values(routesMap).map(
-  ({ path, index, element, ...rest }) => rest,
-);
-
-export { routerRoutes, sidebarRoutes };
+export { routerRoutes, sidebarItemsMap };

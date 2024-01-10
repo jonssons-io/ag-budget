@@ -18,17 +18,13 @@ export default function AuthorizedLayout() {
   const { Content } = Layout;
   const ContentWithSuspense = withSuspense(Content);
 
-  console.log("test", userId);
-  console.log("loaded", isLoaded);
-  console.log("signedin", isSignedIn);
-
   useEffect(() => {
     if (!userId && isLoaded && !isSignedIn) {
       navigate("/sign-in");
     } else {
       // make get request to get budget data
       getToken().then((token) => {
-        fetch("/test", {
+        fetch("/protected-endpoint", {
           method: "POST",
           // method: "GET",
           headers: {

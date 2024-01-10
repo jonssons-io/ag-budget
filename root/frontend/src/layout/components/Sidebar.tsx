@@ -2,17 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout, Menu, Space, Flex } from "antd";
 import { useAtomValue } from "jotai";
-import { sidebarRoutes } from "../../util/router/routes";
+import { sidebarItemsMap } from "../../util/router/routes";
 import RethinkLogo from "../../assets/RethinkLogo";
 import { darkModeAtom } from "../../state/atoms";
-
-interface MenuInfo {
-  key: string;
-  keyPath: string[];
-  /** @deprecated This will not support in future. You should avoid to use this */
-  item: React.ReactInstance;
-  domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
-}
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -26,11 +18,15 @@ export default function Sidebar() {
     backdropFilter: "saturate(200%) blur(1.875rem)",
   };
 
-  const handleMenuClick = (e: MenuInfo) => {
-    if (e.key) {
-      const target = sidebarRoutes.find((item) => item.key === e.key) || null;
+  const handleMenuClick = (menuItemKey: string) => {
+    if (sidebarItemsMap && menuItemKey) {
+      const flattenedItems = sidebarItemsMap.flatMap((item) =>
+        item.children ? [item, ...item.children] : item,
+      );
+      const target =
+        flattenedItems.find((item) => item.key === menuItemKey) || null;
       if (target) {
-        navigate(target.key);
+        navigate(target.key as string);
       }
     }
   };
@@ -56,13 +52,14 @@ export default function Sidebar() {
           />
         </Space>
       </Flex>
-
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={["1"]}
-        items={sidebarRoutes}
-        onClick={(e) => handleMenuClick(e)}
-      />
+      <Flex vertical justify="center">
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={["1"]}
+          items={sidebarItemsMap}
+          onClick={(menuItem) => handleMenuClick(menuItem.key)}
+        />
+      </Flex>
     </Sider>
   );
 }

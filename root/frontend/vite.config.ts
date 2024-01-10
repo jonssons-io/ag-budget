@@ -11,9 +11,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/test": {
-        target:
-          "https://ag-budget-backend-3slhga2ry-jonssons-projects.vercel.app",
+      "/protected-endpoint": {
+        // target:
+        //   "https://ag-budget-backend-3slhga2ry-jonssons-projects.vercel.app",
+        target: "http://192.168.50.160:5000",
         secure: true,
         changeOrigin: true,
       },
