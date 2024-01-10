@@ -20,6 +20,7 @@
     "@ant-design/icons": "^5.2.6",
     "@ant-design/plots": "^2.1.5",
     "@clerk/clerk-react": "^4.30.2",
+    "@tanstack/react-query": "^5.17.9",
     "antd": "^5.12.8",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.2",
@@ -29,6 +30,7 @@
     "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.17.7",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.18.0",
