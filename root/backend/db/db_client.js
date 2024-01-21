@@ -1,25 +1,31 @@
 const { sql } = require("@vercel/postgres");
 
-const getUserInfo = async (id) => {
-  return selectOne(sql`select * from budget_user where id=${id}`);
+const getUserInfo = async (externalId) => {
+  return selectOne(sql`select * from budget_user where id=${externalId}`);
 };
 
-const getOwnedBudgets = async (id) => {
-  return selectMany(sql`select * from budget where owner_id=${id}`);
+const getOwnedBudgets = async (externalId) => {
+  return selectMany(sql`select * from budget where owner_id=${externalId}`);
 };
 
-const getAssociatedBudgets = async (userId) => {
+const getAssociatedBudgets = async (externalId) => {
   return selectMany(
-    sql`select budget.* from budget join budget_collaborator on budget.id = budget_collaborator.budget_id where budget_collaborator.user_id=${userId}`
+    sql`select budget.* from budget join budget_collaborator on budget.id = budget_collaborator.budget_id where budget_collaborator.user_id=${externalId}`
   );
 };
 
-const getExpenses = async (budgetId) => {
-  return selectMany(sql`select * from expense where budget_id=${budgetId}`);
+const getExpenses = async (externalId, budgetId) => {
+  return selectMany(sql`select expense.* from expense 
+  join budget on expense.budget_id = budget.id
+  join budget_collaborator on budget.id = budget_collaborator.budget_id
+  where expense.budget_id = ${budgetId} and budget_collaborator.user_id = ${externalId}`);
 };
 
-const getIncomes = async (budgetId) => {
-  return selectMany(sql`select * from income where budget_id=${budgetId}`);
+const getIncomes = async (externalId, budgetId) => {
+  return selectMany(sql`select income.* from income 
+  join budget on income.budget_id = budget.id
+  join budget_collaborator on budget.id = budget_collaborator.budget_id
+  where income.budget_id = ${budgetId} and budget_collaborator.user_id = ${externalId}`);
 };
 
 /** Wrapper functions */

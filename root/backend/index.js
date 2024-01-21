@@ -1,4 +1,6 @@
 const express = require("express");
+const { ClerkExpressRequireAuth } = require("@clerk/clerk-sdk-node");
+
 const {
   getUserInfo,
   getAssociatedBudgets,
@@ -8,50 +10,47 @@ const {
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log("Request: ", req);
-  next();
-});
-
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
 });
 
-app.get("/user", async (req, res) => {
-  let userId = req.query.id ?? "-"; // Id should probably not be a query parameter
+app.get("/api/user", ClerkExpressRequireAuth(), async (req, res) => {
+  let userId = req.auth.userId;
   let userInfo = await getUserInfo(userId);
   res.send(userInfo);
 });
 
-app.get("/budgets", async (req, res) => {
-  let userId = req.query.userid ?? "-"; // Id should probably not be a query parameter
+app.get("/api/budgets", ClerkExpressRequireAuth(), async (req, res) => {
+  let userId = req.auth.userId;
   let associatedBudgets = await getAssociatedBudgets(userId);
   res.send(associatedBudgets);
 });
 
-app.get("/budgets/:id/expenses", async (req, res) => {
-  let budgetId = req.params.id;
-  let expenses = await getExpenses(budgetId);
-  res.send(expenses);
-});
+app.get(
+  "/api/budgets/:id/expenses",
+  ClerkExpressRequireAuth(),
+  async (req, res) => {
+    let userId = req.auth.userId;
+    let budgetId = req.params.id;
+    let expenses = await getExpenses(userId, budgetId);
+    res.send(expenses);
+  }
+);
 
-app.get("/budgets/:id/incomes", async (req, res) => {
-  let budgetId = req.params.id;
-  let incomes = await getIncomes(budgetId);
-  res.send(incomes);
-});
+app.get(
+  "/api/budgets/:id/incomes",
+  ClerkExpressRequireAuth(),
+  async (req, res) => {
+    let userId = req.auth.userId;
+    let budgetId = req.params.id;
+    let incomes = await getIncomes(userId, budgetId);
+    res.send(incomes);
+  }
+);
 
-app.get("/test", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.send("OK");
-});
-app.post("/test", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.send("OK");
-});
-app.put("/test", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.send("OK");
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(401).send("Unauthenticated");
 });
 
 app.listen(5000, () => {
