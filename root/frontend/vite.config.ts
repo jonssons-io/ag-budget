@@ -11,7 +11,7 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/protected-endpoint": {
+      "/api": {
         // target:
         //   "https://ag-budget-backend-3slhga2ry-jonssons-projects.vercel.app",
         target: "http://192.168.50.160:5000",

@@ -1,9 +1,11 @@
-import { useEffect, lazy } from "react";
+/* eslint-disable */
+import { useEffect, lazy, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
-import { Layout } from "antd";
+import { Flex, Layout, Spin } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import withSuspense from "../util/hoc/withSuspense";
 import MessagePopup from "../util/message/MessagePopup";
+import { useGetBudgets } from "../api/hooks/useGetBudgets";
 
 const Sidebar = lazy(() => import("./components/Sidebar"));
 const CustomHeader = lazy(() => import("./components/CustomHeader"));
@@ -13,7 +15,14 @@ const CustomHeaderWithSuspense = withSuspense(CustomHeader);
 
 export default function AuthorizedLayout() {
   const { userId, isLoaded, isSignedIn, getToken } = useAuth();
+  const [userToken, setUserToken] = useState("");
   const navigate = useNavigate();
+  const {
+    data: budgetsData,
+    isFetching: isBudgetsFetching,
+    error: budgetsError,
+    status: budgetsStatus,
+  } = useGetBudgets({ token: userToken, enabled: !!userToken });
 
   const { Content } = Layout;
   const ContentWithSuspense = withSuspense(Content);
@@ -24,28 +33,21 @@ export default function AuthorizedLayout() {
     } else {
       // make get request to get budget data
       getToken().then((token) => {
-        fetch("/protected-endpoint", {
-          method: "POST",
-          // method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // if you need to include a token
-          },
-          body: JSON.stringify({
-            userId,
-            token,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+        setUserToken(token ?? "");
       });
     }
   }, [isLoaded, isSignedIn, navigate, userId, getToken]);
 
+  useEffect(() => {
+    console.log("fetching: ", isBudgetsFetching);
+    console.log("status: ", budgetsStatus);
+    console.log("data: ", budgetsData);
+    console.log("error: ", budgetsError);
+  }, [isBudgetsFetching, budgetsStatus, budgetsData, budgetsError]);
+
   if (!isLoaded) return "Loading...";
+
+  if (budgetsError) throw budgetsError;
 
   return (
     <Layout style={{ minHeight: "100vh", paddingRight: "1rem" }}>
@@ -54,7 +56,17 @@ export default function AuthorizedLayout() {
         <CustomHeaderWithSuspense />
         <ContentWithSuspense>
           <MessagePopup />
-          <Outlet />
+          {isBudgetsFetching ? (
+            <Flex
+              justify="center"
+              align="center"
+              style={{ height: "100%", width: "100%" }}
+            >
+              <Spin size="large" />
+            </Flex>
+          ) : (
+            <Outlet />
+          )}
         </ContentWithSuspense>
       </Layout>
     </Layout>
