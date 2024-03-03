@@ -6,9 +6,22 @@ const {
   getAssociatedBudgets,
   getIncomes,
   getExpenses,
+  createBudget,
+  updateBudget,
 } = require("./db/db_client");
 
 const app = express();
+
+app.use((req, res, next) => {
+  const { path, method, headers, body } = req;
+  const currentTime = new Date().toISOString();
+  console.log(`${currentTime} ${method} ${path}`);
+  console.log("Request Headers:", headers);
+  if (body) {
+    console.log("Request Body:", body);
+  }
+  next();
+});
 
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
@@ -24,6 +37,21 @@ app.get("/api/budgets", ClerkExpressRequireAuth(), async (req, res) => {
   let userId = req.auth.userId;
   let associatedBudgets = await getAssociatedBudgets(userId);
   res.send(associatedBudgets);
+});
+
+app.post("/api/budgets", ClerkExpressRequireAuth(), async (req, res) => {
+  let userId = req.auth.userId;
+  let budgetName = req.body.name;
+  let budget = await createBudget(userId, budgetName);
+  res.send(budget);
+});
+
+app.put("/api/budgets/:id", ClerkExpressRequireAuth(), async (req, res) => {
+  let userId = req.auth.userId;
+  let budgetId = req.params.id;
+  let budgetName = req.body.name;
+  let budget = await updateBudget(userId, budgetId, budgetName);
+  res.send(budget);
 });
 
 app.get(

@@ -14,6 +14,18 @@ const getAssociatedBudgets = async (externalId) => {
   );
 };
 
+const createBudget = async (externalId, name) => {
+  return insert(
+    sql`insert into budget (owner_id, name) values (${externalId}, ${name})`
+  );
+};
+
+const updateBudget = async (externalId, budgetId, name) => {
+  return update(
+    sql`update budget set name = ${name} where id = ${budgetId} and owner_id = ${externalId}`
+  );
+};
+
 const getExpenses = async (externalId, budgetId) => {
   return selectMany(sql`select expense.* from expense 
   join budget on expense.budget_id = budget.id
@@ -48,7 +60,17 @@ const selectMany = async (query) => {
   }
 };
 
-/** */
+const insert = async (query) => {
+  const res = await query;
+  console.log("insert returned:", res);
+  return res;
+};
+
+const update = async (query) => {
+  const res = await query;
+  console.log("update returned:", res);
+  return res;
+};
 
 module.exports = {
   getUserInfo,
@@ -56,4 +78,6 @@ module.exports = {
   getAssociatedBudgets,
   getExpenses,
   getIncomes,
+  createBudget,
+  updateBudget,
 };
