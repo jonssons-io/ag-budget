@@ -42,8 +42,8 @@ importers:
         specifier: ^2.1.5
         version: 2.1.5(lodash-es@4.17.21)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/clerk-react':
-        specifier: ^4.30.2
-        version: 4.30.2(react@18.2.0)
+        specifier: ^4.30.7
+        version: 4.30.7(react@18.2.0)
       antd:
         specifier: ^5.12.8
         version: 5.12.8(react-dom@18.2.0)(react@18.2.0)
@@ -699,20 +699,20 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@clerk/clerk-react@4.30.2(react@18.2.0):
-    resolution: {integrity: sha512-Cr11vJj/0e75JV1WfR1UFtqJfjFOWRffl8AqcKk+QDOY7AgPd1V4Nvc7umIfhyoGYrJH+5tpga3QW2MlsekdsA==}
+  /@clerk/clerk-react@4.30.7(react@18.2.0):
+    resolution: {integrity: sha512-+6Q1hVteqn66gFLiCKSqqSdz2MBjsEjs1fkGLAEKZC1GdfOKrH6oWcLuSwUdyqRvJWuyjeIgwq15zoHtXKyztA==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
     dependencies:
-      '@clerk/shared': 1.3.0(react@18.2.0)
-      '@clerk/types': 3.60.0
+      '@clerk/shared': 1.3.3(react@18.2.0)
+      '@clerk/types': 3.62.1
       react: 18.2.0
       tslib: 2.4.1
     dev: false
 
-  /@clerk/shared@1.3.0(react@18.2.0):
-    resolution: {integrity: sha512-blqXI4P2FIB2kjXhYe8d5jNIbKSmpSetcT/81xcBr2RVy234cV3oVX41Ypx10M36ev5v5cUqA4FfCSQ782EIUw==}
+  /@clerk/shared@1.3.3(react@18.2.0):
+    resolution: {integrity: sha512-Eein8cK72dlvY6Q1uFuw9K9MJH1OPjU8FzWloMTKklBo+iPiM6+uENGeGwlY5KId3q/kgPwRc2hBQnUoaijxCQ==}
     peerDependencies:
       react: '>=16'
     peerDependenciesMeta:
@@ -725,8 +725,8 @@ packages:
       swr: 2.2.0(react@18.2.0)
     dev: false
 
-  /@clerk/types@3.60.0:
-    resolution: {integrity: sha512-f1A16wFh5MtikxEo7o6vAVX7FxpqC1YmzA6c4ugwq5MH8J2mvIM/LwNVIHgNpZkn/s/G+BUhBcJJmUXqajDK2Q==}
+  /@clerk/types@3.62.1:
+    resolution: {integrity: sha512-RmQhWB7EMZw2nE24viQG79VyEUULZYWndYew5oXiZx06DyvysMNCorDyEGRmgBbprv7bnbYhHdOtKmx8Wj0jug==}
     engines: {node: '>=14'}
     dependencies:
       csstype: 3.1.1
